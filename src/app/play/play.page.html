@@ -1,0 +1,27 @@
+<ion-content class="background" [fullscreen]="true">
+  <ion-img class="logo" [src]="getLogo()"></ion-img>
+  <div class="you-win" *ngIf="youwin">
+    <ion-img class="logo" [src]="getWin()"></ion-img>
+  </div>
+  <div class="bubble-items" style="margin-top:50px;">
+    <div *ngFor="let bubble of randomBubbles" style="display:flex">
+      <button class="bubble" [ngClass]="bubble"></button>
+    </div>
+  </div>
+  <div cdkDropListGroup>
+      <div class="bubble-items" style="margin-top:100px;">
+        <div *ngFor="let bubble of randomBubbles">
+          <div cdkDropList [cdkDropListData]="bubble" [attr.id]="bubble" [cdkDropListConnectedTo]="bubble+'drop'" class="example-list" cdkDropListSortingDisabled (cdkDropListDropped)="drop($event)" style="display:flex;position:relative;width:40px;height:40px;">
+            <button [ngClass]="getClass(bubble)" style="position: absolute;width:100%height:100%;left:0px;"></button>
+          </div>
+        </div>
+      </div>
+      <div class="bubble-items" style="margin-top:200px;">
+        <div *ngFor="let sbubble of shuffleBubbles" style="display:flex">
+          <div cdkDropList [cdkDropListData]="sbubble" [attr.id]="sbubble+'drop'" [cdkDropListConnectedTo]="sbubble" class="example-list" cdkDropListSortingDisabled (cdkDropListDropped)="drop($event)" style="display:flex;position:relative;">
+            <button class="bubble" [ngClass]="sbubble" cdkDrag></button>
+          </div>
+        </div>
+      </div>
+  </div>
+</ion-content>
